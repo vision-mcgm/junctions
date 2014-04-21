@@ -1,0 +1,54 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\makeatletter % Reference list option change
+\renewcommand\@cite[1]{#1} % from [1] to 1
+\makeatother %
+
+\title{Differential speed of diffusion as a kinetic mechanism for cell sorting}
+
+\begin{document}
+\maketitle
+\interfootnotelinepenalty=10000
+
+\section{Work flow}
+
+imageStackAnalysis (findEdges) - > postanalysis
+
+
+\section{Getting confused about the axis}
+
+Imshow uses a different coordinate system than the rest of matlab. This can cause confusion when getting angles and plotting junctions.
+
+\section{Counting T1 transitions}
+
+'find_and_visualise_T1'
+
+\section{Determining orientation of T1 transitions}
+MSD
+http://www.mathworks.co.uk/matlabcentral/fileexchange/40692-mean-square-displacement-analysis-of-particles-trajectories
+
+
+\section{Comparison with GBE}
+This heatmap shows the crosscorrelation pattern for all junctions, but as the graphs of angle dependence shows, the dynamics for T1 junctions do not differ from those of other junctions.
+
+We here have just one GBE T1 transitions, so I'm vary of concluding too much, but the crosscorrelation pattern is diffent (is it??). Now we need to establish whether it also differs from the general fluctuations in the tissue.
+
+\section{Debugging to do}
+
+1. Image Processing Toolbox is used extensively throughout this code and is therefore required.
+2. Parallel Computing Toolbox is required if the user wishes to process multiple images concurrently, which greatly reduces processing time. However, the user may choose to process the images in serial, thereby avoiding the need for the Parallel Computing Toolbox.
+3. Statistics Toolbox is used in the smoothing algorithm (compute data GUI → smooth disp → smooth moving average → normal distribution → normcdf ).
+
+Consider writing image_stack_analysis as parallel computing, would considerably speed up the analysis
+
+----
+
+
+DEBUG: why does junction ID: 111 only have one vertex at time = 6, when in the movie it clearly looks fine?
+
+I wanted to use angle of junctions as a third dimensional parameter for the tracking algorithm, but the consequence would be that T1 junctions would have a different ID before and after. Problem.
+
+\end{document}

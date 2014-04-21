@@ -1,0 +1,219 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf400
+{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red34\green139\blue34;}
+\paperw11900\paperh16840\margl1440\margr1440\margb1701\margt1701\vieww11900\viewh16300\viewkind1
+\deftab720
+\pard\pardeftab720\ri0
+
+\f0\fs20 \cf0 Strategy: focus on getting code working for one figure at a time and finish this figure enough for the write-up. Plus read some articles.\
+\
+In general:\
+\
+\pard\pardeftab720\ri0
+\cf0 \strike \strikec0 Only save variables needed, not whole workspace\
+\pard\pardeftab720\ri0
+\cf0 \strike0\striked0 \
+\
+ImageStackAnalysis:  \
+\
+\pard\pardeftab720\ri0
+\cf2 \strike \strikec2 %Truncate junctions_array\
+\pard\pardeftab720\ri0
+\cf2 \strike0\striked0 \
+orientation:\
+%could just use tan^-1!
+\fs24 \cf0 \
+\
+\pard\pardeftab720\ri0
+
+\fs20 \cf0    
+\fs24 \
+\
+Postanalysis:\
+\
+\pard\pardeftab720\ri0
+\cf0 \strike \strikec0 Rewrite midpoint now that pixels are stored in order.\
+\pard\pardeftab720\ri0
+\cf0 \strike0\striked0 \
+\pard\pardeftab720\ri0
+\cf0 \strike \strikec0 Rewrite length to remove the error from using perimeter\
+\pard\pardeftab720\ri0
+\cf0 \strike0\striked0 \
+check 'get_angle_distance_correlation' - this is the heatmap of crosscorrelations in the tissue\
+\
+Check 'neighbour_crosscorrelation.m' - is it doing it correctly, can it be done better?\
+\
+\pard\pardeftab720\ri0
+\cf0 \strike \strikec0 Write junction_neigbhours as adjacency\strike0\striked0  list BUT beware that it is used in subsequent scripts and these need to be corrected as well if any changes are made!!\
+\
+Tracking algorithm:\
+\
+include angle as z coordinate, modify tracking to deal with T1 transitions (angle changes by 90 degrees). Weigh z coordinate as less important in tracking algorithm than x and y. Use angle*length to ensure a measure that's continuous.\
+\
+\
+----------------------\
+\
+Check angle algorithm, test for T1 transitions\
+\
+\
+Conceptual discussions:\
+\
+- General thoughts on each project. Are there other figures/measures worth looking at?\
+\
+- T1 events. What are the predictions of each model? Are there other predictions we can make?\
+\
+- Create mechanistic model of how a junction behaves. What information do we need for this?\
+\
+- What does the ratio of T1 to non-T1 tell us? Energy barrier to changing neighbors? Reversible vs irreversible?\
+\
+- Simulated data / statistical test for how many T1 transitions are expected if it's just a byproduct of fluctuations.\
+\
+- Continue with discussion of how to interpret angle-crosscorrelation plot. How would the different models give us different predictions?\
+\
+- Does a junction know its own length? Are there things that we can predict will/won't have a length dependence?\
+\
+- Is there force balance at vertices, can we check this?\
+\
+- Why is the length of junction sub diffusive? How do we address it?\
+\
+Understand how the diffusion of vertices relates to the fluctuations in junction length. Are neighboring vertices correlated? What would we expect? Would we expect vertex motion to be constrained by the three junctions they're connected to? Is the MSD the right way to characterize this?\
+Are vertices correlated with their neighbors? Take vertex, subtract motion of neighbor vertex, do MSD for this. Is is sub diffusive? If not, are junction lengths sub diffusive and is this an artifact of 1D vs. 2D?\
+\
+- Is the MSD the right way to characterize fluctuations? Are there better ways of looking at the 'noise' in a tissue?\
+\
+- Does using the cross correlation make sense at all?\
+\
+Are there any conclusions we can draw?\
+Talk generally about heat map\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+Projects 1: T1 transitions\
+\
+Hypothesis: In wild type, T1 transitions are a byproduct of stochastic fluctuations and there is no active mechanism. This is in contrast with the active mechanism in germ band elongation (GBE).\
+\
+\
+Figures/results:\
+\
+Angle distribution of junctions undergoing T1 in wild type and in GBE.\
+\
+Frequency of T1 transitions (number per junction per time) in wild type and GBE. Ratio of T1 to potential-T1 (shrink to four-way vertex but no neighbor exchange). What does this ratio tell us? What do we expect the ratio to be?\
+\
+Simulated data / statistical test for how many T1 transitions are expected if it's just a byproduct of fluctuations.\
+\
+Is there an energy barrier to changing neighbours? Get the 'pause time' at a four-way vertex for junctions that do a T1 compared to junctions that don't. Does longer pause time indicate energy barrier?\
+\
+Hypothesis, corollary: In GBE T1 transitions are irreversible, in wild type they are reversible (as would be expected if they're just a byproduct of stochastic fluctuations. \
+\
+How are they stabilized? Is it asymmetry before T1 -> symmetry after? Get angles of neighboring junctions relative to junction doing T1, do histogram of smallest angle and largest angle, before and after, and see if that increases or decreases. Alternatively do largest angle minus smallest angle.\
+\
+Is the contraction process different from the expansion process? In wild type and GBE?\
+\
+\
+Project 2: Characterizing fluctuations / creating a mechanistic model of a junction\
+\
+Question / hypothesis: Does a junction act as a unit? Does it know its own length or is it made up of fairly independent subunit? How is the length of a junction regulated? Is there 'junctional homeostasis'?\
+\
+How is junctional material added? From the ends or along the whole length? Prediction: if material is only added at the length, fluctuations should be independent of length. If material is added along the whole length, fluctuations should be length dependent.\
+\
+Are there other things we would either expect to be length dependent or expect not to be?\
+\
+Quantify 'type' of fluctuations for wild type, mutant, GBE, and early vs late. Are the fluctuations different? We might expect the tissue to 'need' more noise early in development than later, when it is more ordered. Is this what we see?\
+\
+What is the relation between the diffusion of vertices and the fluctuations in junction length.\
+\
+Question:\
+How do vertices diffuse? Is there diffusion random? Do we expect it to be sub-diffusive? \
+- Is the diffusion of neighboring vertices correlated? \
+- If so, does the correlation depend on a) the euclidian distance between them, b) the junction (membrane) distance between them, or c) the number of junctions separating them?\
+This will tell us about the mechanics of force transduction.\
+\
+\
+\
+\
+Project 3: Tension\
+\
+Hypothesis: We can infer the tension in a tissue 'visually' from the fluctuations.\
+\
+Figures/Results:\
+Laser-cuts of junctions in wild type and mutant tissue. This is a direct measure of tension.\
+\
+Compare with analysis of junctions. Use either diffusion of vertices or how sub-diffusive junctions are. Is there another measure we can use?\
+\
+Most models assume that there is a force balance / tension balance at each vertex? Is that a reasonable assumption? Is there a way to test this?\
+\
+\
+\
+Questions:\
+\
+What does the cross correlation of first, second, third neighbors tells us about\
+- the elasticity of junctions?\
+- tension in the tissue?\
+- ?\
+\
+Is a junction a 'unit'? Does it know it own length? When a junction changes its length, do both vertices move? How can we answer this?\
+\
+We might expect second neighbors to be anti-correlated (if junctions aren't elastic and effect of one junction contracted is felt further away). Or positive correlated (first neighbours are anti-correlated, so its neighbor would be anti-correlated with it). There doesn't seem to be a correlation, how do we interpret this, what does it tell us?\
+\
+When a junction changes its length, do both vertices move?
+\f1\fs22 \
+\
+\
+----\
+\
+Junctions being sub diffusive: there's a memory effect rather than a preferred length in the system. Look at modeling time series as AP? and get length of memory out.\
+\
+\
+Plot of distribution of lengths. Redo without border junctions! The interpretation we made - is that still valid with multiple particles? Simulate a system of fixed size with n particles diffusing freely, what is the distance between them?\
+\
+\
+\
+Later:\
+run additional tests on the rewritten 'find T1 code'\
+\
+correct how neighbors are found in neighbor cross correlation, (box plots and heat map)\
+\
+\
+\pard\pardeftab720\ri0
+
+\f0\fs24 \cf0 Maybe do Optical flow for all movies before analyzing them, not just GBE?\
+Maybe remove drift using Optical Flow code instead of method currently used for diffusion of vertices? \
+\
+Get div and curl of flow vector field\
+\
+\
+Code that needs editing:\
+get_angle_distance_correlation\
+first_neighbour_angles\
+neighbour_crosscorrelation\
+second_neighbour_angles\
+T1_first_neighbour_angles\
+T1orientation\
+run_me_to_visualize_correlations\
+plotjunctions\
+plotT1FrequencyAndInterval\
+\
+\
+\
+\
+Create model:\
+\
+looking at vertices is diffusion limited\
+\
+zipping, unzipping\
+\
+association / dissociation of cadherins is quantized\
+\
+force is quantized\
+\
+amplitude of fluctuations is not length dependent\
+\
+kinetics}
